@@ -1,0 +1,7 @@
+{
+  "_readme": "Use Settings and Controls to customize STARK.",
+  "camera": "auto",
+  "gesture_guard": true,
+  "clap_wake": false,
+  "bindings": {}
+}

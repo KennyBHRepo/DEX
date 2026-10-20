@@ -1,0 +1,13 @@
+.DS_Store
+.venv/
+.venv-old/
+__pycache__/
+*.py[cod]
+*.log
+*.app/
+ui-check/
+models/*.task
+backup*/
+_to_delete/
+build/
+dist/

@@ -1,0 +1,11 @@
+# Pinned to the versions HandControl was tested with.
+mediapipe==0.10.32
+numpy<2.1
+pyobjc-framework-Quartz==11.1; sys_platform == "darwin"
+pyobjc-framework-ApplicationServices==11.1; sys_platform == "darwin"
+pyobjc-framework-AVFoundation==11.1; sys_platform == "darwin"
+pynput; sys_platform != "darwin"
+
+# Native desktop UI and explicit OpenCV dependency.
+pyobjc-framework-Cocoa==11.1; sys_platform == "darwin"
+opencv-contrib-python==5.0.0.93
