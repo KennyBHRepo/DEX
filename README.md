@@ -8,6 +8,8 @@
 
 Formerly Dex. This repository keeps its original **DEX** URL.
 
+See the [timestamped work history](WORK_LOG.md) for the complete development summary, fixes, validation and current limitations.
+
 ## Install on your Mac
 
 1. Choose **Code → Download ZIP** above, unzip it, and move the folder somewhere permanent, such as Documents/STARK.
