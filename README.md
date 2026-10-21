@@ -1,5 +1,7 @@
 # STARK
 
+**STARK — Spatial Tracking and Recognition Kit.**
+
 <img src="assets/stark-icon.png" alt="STARK neon cursor logo" width="160">
 
 **Your hands are the interface.** A native macOS hand-control app with a camera preview, floating mini preview, multi-display pointer control, configurable gestures, guided practice and optional double-clap wake.

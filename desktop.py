@@ -148,7 +148,7 @@ class Desktop(A.NSObject):
             A.NSApp.setApplicationIconImage_(self.icon)
         image_view(root, self.icon, 24, 634, 52, 52)
         label(root, 'STARK', 85, 649, 400, 34, 27, True)
-        label(root, 'Your hands are the interface.', 87, 626, 440, 25, 13, muted=True)
+        label(root, 'Spatial Tracking and Recognition Kit', 87, 626, 440, 25, 13, muted=True)
         button(root, 'Mini preview', 650, 641, 130, self, 'showCompact:')
         self.controls_button = button(root, 'Controls…', 790, 641, 112, self, 'openControls:')
         self.settings_button = button(root, 'Settings…', 910, 641, 107, self, 'openSettings:')
@@ -681,7 +681,7 @@ class Desktop(A.NSObject):
         return True
 
     def about_(self, sender):
-        self.alert('STARK', 'Hands-free control for your Mac.\n\nSTARK runs the HandControl engine in '
+        self.alert('STARK', 'Spatial Tracking and Recognition Kit.\n\nHands-free control for your Mac.\n\nSTARK runs the HandControl engine in '
                    'the HandControl folder on your Desktop. Video is processed on this Mac and '
                    'never recorded.\n\n⌃⌥M turns gestures on or off from any app.')
 
