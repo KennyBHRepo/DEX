@@ -202,5 +202,29 @@ for pose, n in (("open", 5), ("pinch_middle", 3)):
         t2 += 1/30; e2.update([L(hand(.3, .5, pose))], t2, 1.0)
 check("custom binding fires instantly when no hold is bound", acts() == [("hotkey", "cmd", "shift", "t")], acts())
 
+# Dictation must pass through the production intent guard without arming clicks.
+from gesture_guard import GestureGuard
+for wrap in (L, R):
+    for swapped in (False, True):
+        events = []
+        backend = DryRun(events)
+        engine = Engine(backend, backend, 1440, 900, cfg={"swap_hands": swapped})
+        guard = GestureGuard()
+        for frame in range(12):
+            now = frame / 30
+            engine.update(guard.filter([wrap(hand(.5, .6, "call"))], now, aspect=1), now, 1)
+        check(f"guard allows {wrap.__name__} call, swapped={swapped}",
+              events == [("hold", "fn", True)], events)
+        engine.release_controls()
+        check("unrelated control loss keeps dictation held", engine.dictating, events)
+        for frame in range(12, 17):
+            now = frame / 30
+            engine.update(guard.filter([wrap(hand(.5,.6,"pinch_index"))],now,aspect=1),now,1)
+        check("call does not arm pinch and brief dropout keeps dictation", events == [("hold","fn",True)], events)
+        for frame in range(17, 40):
+            now = frame / 30
+            engine.update(guard.filter([],now,aspect=1),now,1)
+        check("guard dropout releases dictation", events == [("hold","fn",True),("hold","fn",False)],events)
+
 print(f"\n{len(fails)} failed" if fails else "\nALL PASSED")
 sys.exit(1 if fails else 0)

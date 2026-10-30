@@ -435,6 +435,10 @@ class Engine:
 
     def _release_all(self):
         self._stop_dictation()
+        self.release_controls()
+
+    def release_controls(self):
+        """Release pointer/shortcut state without interrupting dictation."""
         if self.button_down:
             self.mouse.up("left", *self.cursor)
             self.button_down = False
@@ -464,7 +468,8 @@ class Engine:
                 label = "Left" if label == "Right" else "Right"
             lm = [(x * aspect, y) for x, y in h["lm"]]   # square up the geometry
             hand = {"lm": lm, "raw": h["lm"], "scale": hand_scale(lm),
-                    "shape": classify(lm), "ratios": pinch_ratios(lm)}
+                    "shape": classify(lm), "ratios": pinch_ratios(lm),
+                    "dictation_only": h.get("dictation_only", False)}
             if label == "Right" and right is None:
                 right = hand
             elif label == "Left" and left is None:
@@ -498,6 +503,10 @@ class Engine:
             return st
 
         self._dictation(left, right, st, t)
+        if left and left["dictation_only"]:
+            left = None
+        if right and right["dictation_only"]:
+            right = None
 
         # Both palms open, held still: Spotlight by default.
         both_open = bool(left and right and left["pose"] == "open" and right["pose"] == "open")

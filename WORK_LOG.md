@@ -13,6 +13,13 @@ STARK is a native macOS interface around the original HandControl gesture engine
 
 The source, logo, app builder, installation scripts, documentation and tests are published here. The generated `.app` is a local launcher that depends on the source folder and Python environment; it is not a portable, notarized application bundle.
 
+## October 30, 2026 at 09:30:38 AM EDT — Either-hand dictation fix
+
+* Fixed the intent guard blocking the thumb-and-pinky (🤙) dictation sign until an open palm had armed pointer control. Either hand can now request dictation directly, including with swapped hand roles.
+* Kept dictation-only recognition separate from cursor, clicks and shortcut gestures. Tracking-loss cleanup now releases pointer actions without cutting off dictation's existing dropout grace.
+* Prioritized live dictation feedback over an unrelated hand's open-palm reminder.
+* Validation: all 119 automated checks passed, including 16 new guard-to-engine checks for either hand, swapped roles, dropout release, and prevention of accidental pinch activation. Live speech transcription remains a user check with Wispr Flow running and its shortcut matching STARK's settings.
+
 ## October 4, 2026 — Native desktop experience
 
 * Replaced the terminal-oriented experience with a native AppKit interface while retaining the camera preview and underlying gesture/input engine.

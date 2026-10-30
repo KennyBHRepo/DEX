@@ -180,3 +180,7 @@ The original gesture framework was inspired by Marina Budarina’s Hand Tracking
 The earlier face-overlap detector is no longer used; its model can remain on disk but is not loaded. Device ordering follows [OpenCV's AVFoundation backend](https://github.com/opencv/opencv/blob/5.0.0/modules/videoio/src/cap_avfoundation_mac.mm). Native audio follows [Apple's audio-node tap API](https://developer.apple.com/documentation/avfaudio/avaudionode).
 
 Run each `tests/test_*.py` separately with the project Python. The UI check (`DEX_SELFTEST=/tmp/dex-ui-check STARK.app/Contents/MacOS/STARK`) creates windows without opening a camera, listening to the microphone or moving the cursor. Actual clap sensitivity, accidental-gesture rejection and pointer feel need a live check on the user's hardware.
+
+### Dictation with either hand
+
+With gestures on and Wispr Flow running, hold the 🤙 sign (thumb and pinky out, other fingers folded) with either hand to dictate; lower it to stop. No open-palm warm-up is required for dictation. The sign does not arm pointer control. STARK’s dictation shortcut must match Wispr Flow’s shortcut (default: hold Fn). In hands-free mode, show the sign once to start and again to stop.

@@ -379,9 +379,9 @@ class Desktop(A.NSObject):
                                              else 'Live on this Mac · video is never saved')
             event = data.get('event')
             self.feedback.setStringValue_(
-                data.get('guard') or ('Dictation is listening…' if data.get('status', {}).get('dictating')
-                else (event[:1].upper() + event[1:] if event
-                      else 'Tracking your hands.' if hands else 'Bring your hands into view.')))
+                'Dictation is listening…' if data.get('status', {}).get('dictating')
+                else data.get('guard') or (event[:1].upper() + event[1:] if event
+                      else 'Tracking your hands.' if hands else 'Bring your hands into view.'))
         if self.onboarding:
             self.lesson.observe(data)
         self.renderPanel()

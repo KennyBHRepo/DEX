@@ -25,6 +25,11 @@ class GestureGuard:
             if jump:
                 self.reason = 'Hold your hand steady'
                 continue
+            if classify([(x*aspect,y) for x,y in lm]) == 'call':
+                # Dictation is intentional, but must not arm mouse/shortcut control.
+                state['since'] = None
+                accepted.append(dict(hand, dictation_only=True))
+                continue
             if not state['armed']:
                 if classify([(x*aspect,y) for x,y in lm]) == 'open':
                     if state['since'] is None: state['since']=now

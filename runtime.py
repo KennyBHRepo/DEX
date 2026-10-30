@@ -192,10 +192,10 @@ class CaptureWorker(threading.Thread):
                     from gestures import classify
                     if len(hands) == 2 and all(classify([(x*w/h,y) for x,y in hand['lm']]) == 'fist' for hand in hands):
                         filtered = hands  # emergency stop must never need re-arming
-                    labels = {h["label"] for h in filtered}
+                    labels = {h["label"] for h in filtered if not h.get("dictation_only")}
                     if accepted_labels - labels:
-                        # Cancel held clicks/keys and inertia before feeding any remaining hand.
-                        engine.shutdown()
+                        # Cancel pointer/shortcut actions; dictation owns its dropout grace.
+                        engine.release_controls()
                         engine.scroll_vel = (0,0)
                     accepted_labels = labels
                     st = engine.update(filtered, now, aspect=w/h)
